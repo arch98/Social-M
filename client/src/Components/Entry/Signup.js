@@ -3,6 +3,7 @@ import { Jumbotron, Form,Button} from 'react-bootstrap';
 import '../../Style/Entry/Login.css';
 
 class Signup extends Component{
+
     constructor(props){
         super(props);
 
@@ -11,11 +12,12 @@ class Signup extends Component{
             user:"",
             pass:""
         }
-        this.handleChange = this.handleChange.bind(this);
+        this.userInputChange = this.userInputChange.bind(this);
         this.send = this.send.bind(this);
     }
 
-    handleChange(event){
+    /* userInputChange is used to store all the changes made in the input form as a state */
+    userInputChange(event){
         var t = event.target.id;
         if(t === "name"){
             this.setState({
@@ -31,7 +33,8 @@ class Signup extends Component{
             });
         }
     }
-
+    
+    /*send function is used to retrieve the values on click of the submit button in the form*/
     send(){
         this.setState({
             name:"",
@@ -44,21 +47,21 @@ class Signup extends Component{
         return(
             <div className = "First">
                 <Jumbotron>
-                    <h1 id="title1">SignUp for Social Mate!</h1>
+                    <h1 id="title1">Sign up for Social Mate!</h1>
                 </Jumbotron>
                 <div className = "Login">
                     <Form>
                         <Form.Group>
                             <Form.Label><h3>Name</h3></Form.Label>
-                            <Form.Control id="name" onChange ={this.handleChange} value ={this.state.name}/>
+                            <Form.Control id="name" onChange ={this.userInputChange} value ={this.state.name}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label><h3>Username</h3></Form.Label>
-                            <Form.Control id="user" onChange ={this.handleChange} value={this.state.user}/>
+                            <Form.Control id="user" onChange ={this.userInputChange} value={this.state.user}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label><h3>Password</h3></Form.Label>
-                            <Form.Control id="pass" onChange ={this.handleChange} value ={this.state.pass}/>
+                            <Form.Control id="pass" onChange ={this.userInputChange} value ={this.state.pass}/>
                         </Form.Group>
                         <Button variant="primary" id="btn1">
                             Submit

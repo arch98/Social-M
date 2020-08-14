@@ -3,21 +3,26 @@ import {Button,Form} from 'react-bootstrap';
 import '../../Style/Entry/Login.css';
 import {Link} from 'react-router-dom';
 
+
 class Login extends Component{
+
     constructor(props){
         super(props);
 
         this.state ={
+            move:false,
             user:"",
             pass:""
         }
-        this.handleChange = this.handleChange.bind(this);
+
+        this.userInputChange = this.userInputChange.bind(this);
         this.send = this.send.bind(this);
     }
 
-    handleChange(event){
+    /* userInputChange is used to store all the changes made in the input form as a state */
+    userInputChange(event){
         var t = event.target.id;
-
+        console.log(event.target.value);
         if(t === "user"){
             this.setState({
                 user:event.target.value
@@ -28,15 +33,15 @@ class Login extends Component{
             });
         }
     }
-
-    send(){
-
-        const payload ={
-            Username : this.state.user,
-            Password : this.state.pass
-        }
+/*send function is used to retrieve the values on click of the submit button in the form*/
+    send(event){
+       const payload ={
+           "Username": this.state.user,
+           "Password":this.state.pass
+       }
 
         this.setState({
+            move:true,
             user:"",
             pass:""
         });
@@ -49,13 +54,13 @@ class Login extends Component{
                 <Form>
                     <Form.Group>
                         <Form.Label><h3>Username</h3></Form.Label>
-                        <Form.Control id="user" onChange ={this.handleChange} value ={this.state.user}/>
+                        <Form.Control id="user" onChange ={this.userInputChange} value ={this.state.user}/>
                     </Form.Group>
                     <Form.Group>
                         <Form.Label><h3>Password</h3></Form.Label>
-                        <Form.Control id="pass" onChange ={this.handleChange} value={this.state.pass}/>
+                        <Form.Control id="pass" onChange ={this.userInputChange} value={this.state.pass}/>
                     </Form.Group>
-                    <Button variant="primary" id="btn1">
+                    <Button variant="primary" id="btn1" onClick ={this.send}>
                         Submit
                     </Button>
                     <div className="link1">
